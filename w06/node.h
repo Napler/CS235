@@ -49,24 +49,28 @@ namespace custom
     return pNew;
   }
 
+  // Find an element from a linked list
   template <class T> 
   Node<T>* find(Node<T>* pHead, const T& t)
   {
     return NULL;
   }
 
+  // Output the contents of the list
   template <class T> 
   ostream& operator<< (ostream& out, set<T>& rhs)
   {
     return out;
   }
 
+  // Clear the data from the list
   template <class T> 
   void freeData(Node<T>* & pHead)
   {
 
   }
 
+  // Remove an element from the list
   template <class T> 
   Node<T>* remove(const Node<T>* pRemove)
   {
