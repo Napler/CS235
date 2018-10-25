@@ -22,8 +22,9 @@ void sortInsertion(T array[], int num)
 {
 	Node<T> * pNode = new Node<T>;
 	pNode->data = array[0];
+	int i = 0;
 	
-	for (int i = 1; i < num; i++)
+	for (i = 1; i < num; i++)
 	{
 		Node<T> * thisNode = new Node<T>(array[i]);
 
@@ -68,15 +69,15 @@ void sortInsertion(T array[], int num)
 		pNode = pNode->pPrev;
 	}
 	
-	int iter = 0;
+	i = 0;
 	while (pNode->pNext)
 	{
-		array[iter] = pNode->data;
+		array[i] = pNode->data;
 		pNode = pNode->pNext;
-		iter++;
+		i++;
 	}
 	
-	array[iter] = pNode->data;
+	array[i] = pNode->data;
 }
 
 #endif // INSERTION_SORT_H
