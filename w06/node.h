@@ -45,8 +45,10 @@ namespace custom
   template <class T> 
   Node<T>* insert(Node<T>* pNode, const T& t, bool after = false)
   {
+	/* todo
     pNew = new Node(t);
     return pNew;
+	*/
   }
 
   // Find an element from a linked list
@@ -57,11 +59,13 @@ namespace custom
   }
 
   // Output the contents of the list
+  /* todo
   template <class T> 
-  ostream& operator<< (ostream& out, set<T>& rhs)
+  ostream& operator<< (ostream& out, Node<T>& rhs)
   {
     return out;
   }
+  */
 
   // Clear the data from the list
   template <class T> 
