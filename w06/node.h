@@ -23,7 +23,7 @@ public:
 		pNext = NULL;
 		pPrev = NULL;
 	}
-	Node(T t)
+	Node(const T &t)
 	{
 		data = t;
 		pNext = NULL;
