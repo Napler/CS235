@@ -3,9 +3,17 @@
 #     Assignment 06, NODE
 #     Brother XXXXX, CS235
 # Author:
-#     <your name here>
+#     Nathan Prestwich, Jose Paredes, and Cameron Dockstad
 # Summary:
-#     <put a description here>
+#     This program will allow the user to make a linked list
+#     that will allow for the insertion and removal of items
+#     in the list. We then implement the list into a sort
+#     insertion function.
+# The Most Difficult Part:
+#     Nathan:The most difficult part was making 
+#            the copy function.
+#     Jose:
+#     Cameron:
 ###############################################################
 
 ##############################################################
