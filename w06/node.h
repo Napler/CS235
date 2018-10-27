@@ -7,6 +7,7 @@ using namespace std;
 
 /***********************************************
  * NODE
+ * The class we will use for our linked lists.
  **********************************************/
 template <class T>
 class Node
@@ -33,6 +34,7 @@ public:
 
 /***********************************************
  * COPY FUNCTION
+ * Copy a linked list that starts at pSource.
  **********************************************/
 template <class T>
 Node<T> *copy(const Node<T> *pSource)
