@@ -9,6 +9,10 @@
 #     that will allow for the insertion and removal of items
 #     in the list. We then implement the list into a sort
 #     insertion function.
+# Coding Time:
+#     Nathan: 1hr
+#     Jose:
+#     Cameron:
 # The Most Difficult Part:
 #     Nathan:The most difficult part was making 
 #            the copy function.
