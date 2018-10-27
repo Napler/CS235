@@ -1,7 +1,7 @@
 ###############################################################
 # Program:
 #     Assignment 06, NODE
-#     Brother XXXXX, CS235
+#     Brother Kirby, CS235
 # Author:
 #     Nathan Prestwich, Jose Paredes, and Cameron Dockstad
 # Summary:
