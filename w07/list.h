@@ -431,7 +431,7 @@ namespace custom
 		reverse_iterator() : pNode(nullptr) {}
 		reverse_iterator(Node<T> *rhs) : pNode(rhs) {}
 		reverse_iterator(const reverse_iterator &rhs) { *this = rhs; }
-		reverse_iterator &operator=(const reverse_iterator &rhs) { pNode = rhs.p; return *this; }
+		reverse_iterator &operator=(const reverse_iterator &rhs) { pNode = rhs.pNode; return *this; }
 
 		bool operator==(const reverse_iterator &rhs) const { return pNode == rhs.pNode; }
 		bool operator!=(const reverse_iterator &rhs) const { return pNode != rhs.pNode; }
