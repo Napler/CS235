@@ -1,11 +1,20 @@
 ###############################################################
 # Program:
 #     Assignment 07, LIST
-#     Brother XXXXX, CS235
+#     Brother Kirby, CS235
 # Author:
-#     <your name here>
+#     Nathan Prestwich, Jose Paredes, and Cameron Dockstader
 # Summary:
 #     <put a description here>
+# The Most Difficult Part:
+#     Nathan: 
+#     Jose: 
+#     Cameron: Yet another segmentation fault
+# Time:
+#     Paired Programming:
+#     Nathan: 
+#     Jose: 
+#     Cameron: 4.5 hrs
 ###############################################################
 
 ##############################################################
