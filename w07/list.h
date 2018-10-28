@@ -19,8 +19,8 @@ namespace custom
 		list &operartor= (const list &rhs);
 		~list();
 
-		int size() const;
-		bool empty() const;
+		int size() const { return numElements; }
+		bool empty() const { return (bool)(!numElements); }
 		void clear();
 
 		void push_back(T t);
@@ -47,6 +47,80 @@ namespace custom
 		iterator begin();
 		iterator end();
 	};
+	template<class T>
+	inline list<T>::list()
+	{
+		//todo
+	}
+	template<class T>
+	inline list<T>::list(const list & rhs)
+	{
+		//todo
+	}
+	template<class T>
+	inline list<T>::~list()
+	{
+		//todo
+	}
+	template<class T>
+	inline void list<T>::clear()
+	{
+		//todo
+	}
+	template<class T>
+	inline void list<T>::push_back(T t)
+	{
+		//todo
+	}
+	template<class T>
+	inline void list<T>::push_front(T t)
+	{
+		//todo
+	}
+	template<class T>
+	inline void list<T>::pop_back()
+	{
+		//todo
+	}
+	template<class T>
+	inline void list<T>::pop_front()
+	{
+		//todo
+	}
+	template<class T>
+	inline T & list<T>::front()
+	{
+		//todo
+		return T();
+	}
+	template<class T>
+	inline const T & list<T>::front() const
+	{
+		//todo
+		return T();
+	}
+	template<class T>
+	inline T & list<T>::back()
+	{
+		//todo
+		return T();
+	}
+	template<class T>
+	inline const T & list<T>::back() const
+	{
+		//todo
+		return T();
+	}
+	template<class T>
+	inline void list<T>::erase(iterator & it)
+	{
+		//todo
+	}
+	template<class T>
+	inline void list<T>::insert(iterator it, T t)
+	{
+		//todo
+	}
 }
 
 #endif
