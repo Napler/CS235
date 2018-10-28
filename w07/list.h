@@ -69,26 +69,73 @@ namespace custom
 	template<class T>
 	list<T>::list(const list &rhs)
 	{
-		//todo
+		if (rhs.numElements <= 0)
+		{
+			numElements = 0;
+			pHead = nullptr;
+			pTail = nullptr;
+			return;
+		}
+
+		Node<T> *node = rhs.pHead;
+
+		for (int i = 0; i < rhs.numElements; i++)
+		{
+			push_back(node->data);
+			node = node->pNext;
+		}
+
+		numElements = rhs.numElements;
 	}
 
 	template<class T>
 	list<T> &list<T>::operator=(const list &rhs)
 	{
-		//todo
+		clear();
+
+		if (rhs.numElements <= 0)
+		{
+			numElements = 0;
+			pHead = nullptr;
+			pTail = nullptr;
+			return *this;
+		}
+
+		Node<T> *node = rhs.pHead;
+
+		for (int i = 0; i < rhs.numElements; i++)
+		{
+			push_back(node->data);
+			node = node->pNext;
+		}
+
+		numElements = rhs.numElements;
 		return *this;
 	}
 
 	template<class T>
 	list<T>::~list()
 	{
-		//todo
+		clear();
 	}
 
 	template<class T>
 	void list<T>::clear()
 	{
-		//todo
+		if (pHead != nullptr)
+		{
+			while (pHead != pTail)
+			{
+				pHead = pHead->pNext;
+				delete pHead->pPrev;
+			}
+
+			delete pHead;
+			pHead = nullptr;
+			pTail = nullptr;
+		}
+
+		numElements = 0;
 	}
 
 	template<class T>
