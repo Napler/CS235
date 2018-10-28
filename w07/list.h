@@ -13,20 +13,21 @@ namespace custom
 		Node(T t) : data(t), pNext(nullptr), pPrev(nullptr) {};
 	};
 
+
 	template <class T>
 	class list
 	{
 	private:
-		Node<T> * pHead;
-		Node<T> * pTail;
+		Node<T> *pHead;
+		Node<T> *pTail;
 		int numElements;
 
-		void linkNodes(Node<T> * front, Node<T> * back);
+		void linkNodes(Node<T> *front, Node<T> *back);
 
 	public:
 		list() : pHead(nullptr), pTail(nullptr), numElements(0) {};
 		list(const list &rhs);
-		list &operator= (const list &rhs);
+		list &operator=(const list &rhs);
 		~list();
 
 		int size() const { return numElements; }
@@ -49,18 +50,75 @@ namespace custom
 		class reverse_iterator;
 		class const_reverse_iterator;
 
-		iterator find(T t);
-
 		void erase(iterator &it);
 		void insert(iterator it, T t);
 
-		iterator begin();
-		iterator end();
+		iterator find(T t)
+		{
+			//todo
+			return iterator();
+		}
+
+		iterator begin()
+		{
+			return iterator(pHead);
+		}
+		iterator end()
+		{
+			if (pTail != nullptr)
+			{
+				return iterator(pTail->pNext);
+			}
+
+			return iterator();
+		}
+
+		const_iterator cbegin()
+		{
+			return const_iterator(pHead);
+		}
+		const_iterator cend()
+		{
+			if (pTail != nullptr)
+			{
+				return const_iterator(pTail->pNext);
+			}
+
+			return const_iterator();
+		}
+
+		reverse_iterator rbegin()
+		{
+			return reverse_iterator(pTail);
+		}
+		reverse_iterator rend()
+		{
+			if (pHead != nullptr)
+			{
+				return reverse_iterator(pHead->pPrev);
+			}
+			
+			return reverse_iterator();
+		}
+
+		const_reverse_iterator crbegin()
+		{
+			return const_reverse_iterator(pTail);
+		}
+		const_reverse_iterator crend()
+		{
+			if (pHead != nullptr)
+			{
+				return const_reverse_iterator(pHead->pPrev);
+			}
+
+			return const_reverse_iterator();
+		}
 	};
 
 
 	template<class T>
-	void list<T>::linkNodes(Node<T> * front, Node<T> * back)
+	void list<T>::linkNodes(Node<T> *front, Node<T> *back)
 	{
 		front->pNext = back;
 		back->pPrev = front;
@@ -69,20 +127,22 @@ namespace custom
 	template<class T>
 	list<T>::list(const list &rhs)
 	{
+		numElements = 0;
+		pHead = nullptr;
+		pTail = nullptr;
+
 		if (rhs.numElements <= 0)
 		{
-			numElements = 0;
-			pHead = nullptr;
-			pTail = nullptr;
 			return;
 		}
 
 		Node<T> *node = rhs.pHead;
+		push_back(node->data);
 
-		for (int i = 0; i < rhs.numElements; i++)
+		for (int i = 1; i < rhs.numElements; i++)
 		{
-			push_back(node->data);
 			node = node->pNext;
+			push_back(node->data);
 		}
 
 		numElements = rhs.numElements;
@@ -102,11 +162,12 @@ namespace custom
 		}
 
 		Node<T> *node = rhs.pHead;
+		push_back(node->data);
 
-		for (int i = 0; i < rhs.numElements; i++)
+		for (int i = 1; i < rhs.numElements; i++)
 		{
-			push_back(node->data);
 			node = node->pNext;
+			push_back(node->data);
 		}
 
 		numElements = rhs.numElements;
@@ -141,9 +202,9 @@ namespace custom
 	template<class T>
 	void list<T>::push_back(T t)
 	{
-		Node<T> * newNode = new Node<T>(t);
+		Node<T> *newNode = new Node<T>(t);
 
-		if (pHead == NULL)
+		if (pHead == nullptr)
 		{
 			pHead = newNode;
 			pTail = newNode;
@@ -160,9 +221,9 @@ namespace custom
 	template<class T>
 	void list<T>::push_front(T t)
 	{
-		Node<T> * newNode = new Node<T>(t);
+		Node<T> *newNode = new Node<T>(t);
 		
-		if (pHead == NULL)
+		if (pHead == nullptr)
 		{
 			pHead = newNode;
 			pTail = newNode;
@@ -223,6 +284,278 @@ namespace custom
 	{
 		//todo
 	}
+
+	//iterators
+	template <class T>
+	class list <T> ::iterator
+	{
+	private:
+		Node<T> *pNode;
+
+	public:
+		iterator() : pNode(nullptr) {}
+		iterator(Node<T> *rhs) : pNode(rhs) {}
+		iterator(const iterator &rhs) { *this = rhs; }
+		iterator &operator = (const iterator &rhs) { pNode = rhs.pNode; return *this; }
+
+		bool operator==(const iterator &rhs) const { return pNode == rhs.pNode; }
+		bool operator!=(const iterator &rhs) const { return pNode != rhs.pNode; }
+		
+		T &operator*()
+		{
+			if (pNode != nullptr)
+			{
+				return pNode->data;
+			}
+
+			//todo: can't return nullptr?
+		}
+
+		iterator &operator++()
+		{
+			if (pNode != nullptr)
+			{
+				pNode = pNode->pNext;
+			}
+
+			return *this;
+		}
+		iterator operator++(int postfix)
+		{
+			iterator tmp(*this);
+
+			if (pNode != nullptr)
+			{
+				pNode = pNode->pNext;
+			}
+
+			return tmp;
+		}
+		
+		iterator &operator--()
+		{
+			if (pNode != nullptr)
+			{
+				pNode = pNode->pPrev;
+			}
+
+			return *this;
+		}
+		iterator operator--(int postfix)
+		{
+			iterator tmp(*this);
+
+			if (pNode != nullptr)
+			{
+				pNode = pNode->pPrev;
+			}
+
+			return tmp;
+		}
+	};
+
+	template <class T>
+	class list <T> ::const_iterator
+	{
+	private:
+		Node<T> *pNode;
+	public:
+		const_iterator() : pNode(nullptr) {}
+		const_iterator(Node<T> *rhs) : pNode(rhs) {}
+		const_iterator(const const_iterator &rhs) { *this = rhs; }
+		const_iterator &operator=(const const_iterator &rhs) { pNode = rhs.pNode; return *this; }
+
+		bool operator==(const const_iterator &rhs) const { return pNode == rhs.pNode; }
+		bool operator!=(const const_iterator &rhs) const { return pNode != rhs.pNode; }
+		
+		T &operator*()
+		{
+			if (pNode != nullptr)
+			{
+				return pNode->data;
+			}
+			
+			//todo: can't return nullptr?
+		}
+
+		const_iterator &operator++()
+		{
+			if (pNode != nullptr)
+			{
+				pNode = pNode->pNext;
+			}
+
+			return *this;
+		}
+		const_iterator operator++(int postfix)
+		{
+			const_iterator tmp(*this);
+
+			if (pNode != nullptr)
+			{
+				pNode = pNode->pNext;
+			}
+
+			return tmp;
+		}
+
+		const_iterator &operator--()
+		{
+			if (pNode != nullptr)
+			{
+				pNode = pNode->pPrev;
+			}
+
+			return *this;
+		}
+		const_iterator operator--(int postfix)
+		{
+			iterator tmp(*this);
+
+			if (pNode != nullptr)
+			{
+				pNode = pNode->pPrev;
+			}
+
+			return tmp;
+		}
+	};
+
+	template <class T>
+	class list <T> ::reverse_iterator
+	{
+	private:
+		Node<T> *pNode;
+
+	public:
+		reverse_iterator() : pNode(nullptr) {}
+		reverse_iterator(Node<T> *rhs) : pNode(rhs) {}
+		reverse_iterator(const reverse_iterator &rhs) { *this = rhs; }
+		reverse_iterator &operator=(const reverse_iterator &rhs) { pNode = rhs.p; return *this; }
+
+		bool operator==(const reverse_iterator &rhs) const { return pNode == rhs.pNode; }
+		bool operator!=(const reverse_iterator &rhs) const { return pNode != rhs.pNode; }
+
+		T &operator*()
+		{
+			if (pNode != nullptr)
+			{
+				return pNode->data;
+			}
+
+			//todo: can't return nullptr?
+		}
+
+		reverse_iterator &operator++()
+		{
+			if (pNode != nullptr)
+			{
+				pNode = pNode->pPrev;
+			}
+
+			return *this;
+		}
+		reverse_iterator operator++(int postfix)
+		{
+			reverse_iterator tmp(*this);
+
+			if (pNode != nullptr)
+			{
+				pNode = pNode->pPrev;
+			}
+
+			return tmp;
+		}
+
+		reverse_iterator &operator--()
+		{
+			if (pNode != nullptr)
+			{
+				pNode = pNode->pNext;
+			}
+
+			return *this;
+		}
+		reverse_iterator operator--(int postfix)
+		{
+			reverse_iterator tmp(*this);
+
+			if (pNode != nullptr)
+			{
+				pNode = pNode->pNext;
+			}
+
+			return tmp;
+		}
+	};
+
+	template <class T>
+	class list <T> ::const_reverse_iterator
+	{
+	private:
+		Node<T> *pNode;
+
+	public:
+		const_reverse_iterator() : pNode(nullptr) {}
+		const_reverse_iterator(Node<T> *rhs) : pNode(rhs) {}
+		const_reverse_iterator(const reverse_iterator &rhs) { *this = rhs; }
+		const_reverse_iterator &operator=(const reverse_iterator &rhs) { pNode = rhs.pNode; return *this; }
+
+		bool operator == (const const_reverse_iterator &rhs) const { return pNode == rhs.pNode; }
+		bool operator != (const const_reverse_iterator &rhs) const { return pNode != rhs.pNode; }
+
+		T &operator*()
+		{
+			if (pNode != nullptr)
+			{
+				return pNode->data;
+			}
+
+			//todo: can't return nullptr?
+		}
+		
+		const_reverse_iterator &operator++()
+		{
+			if (pNode != nullptr)
+			{
+				pNode = pNode->pPrev;
+			}
+
+			return *this;
+		}
+		const_reverse_iterator operator++ (int postfix)
+		{
+			const_reverse_iterator tmp(*this);
+
+			if (pNode != nullptr)
+			{
+				pNode = pNode->pPrev;
+			}
+
+			return tmp;
+		}
+
+		const_reverse_iterator &operator--()
+		{
+			if (pNode != nullptr)
+			{
+				pNode = pNode->pNext;
+			}
+
+			return *this;
+		}
+		const_reverse_iterator operator--(int postfix)
+		{
+			reverse_iterator tmp(*this);
+
+			if (pNode != nullptr)
+			{
+				pNode = pNode->pNext;
+			}
+
+			return tmp;
+		}
+	};
 }
 
 #endif
