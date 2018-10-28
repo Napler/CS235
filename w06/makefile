@@ -9,15 +9,16 @@
 #     that will allow for the insertion and removal of items
 #     in the list. We then implement the list into a sort
 #     insertion function.
-# Coding Time:
-#     Nathan: 1hr
-#     Jose:
-#     Cameron:
 # The Most Difficult Part:
-#     Nathan:The most difficult part was making 
-#            the copy function.
-#     Jose:
-#     Cameron:
+#     Nathan: The most difficult part was making the copy function
+#     Jose: Relearning how to use pointers effectively 
+#     for this assignment.
+#     Cameron: Understading the concept of what needed to be done.
+# Time:
+#     Paired Programming: 30 min 
+#     Nathan: 1hr 
+#     Jose: 1hr
+#     Cameron: 3.5 hrs
 ###############################################################
 
 ##############################################################
