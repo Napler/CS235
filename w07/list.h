@@ -55,8 +55,13 @@ namespace custom
 
 		iterator find(T t)
 		{
-			//todo
-			return iterator();
+			iterator it = begin();
+			while(*it != t)
+			{
+				it++;
+				if(it == end()) return end();
+			}
+			return it;
 		}
 
 		iterator begin()
@@ -240,19 +245,23 @@ namespace custom
 	template<class T>
 	void list<T>::pop_back()
 	{
+		/*
 		Node<T> *newTail = pTail->pPrev;
 		delete pTail;
 		pTail = newTail;
 		numElements--;
+		*/
 	}
 
 	template<class T>
 	void list<T>::pop_front()
 	{
+		/*
 		Node<T> *newHead = pHead->pNext;
 		delete pHead;
 		pHead = newHead;
 		numElements--;
+		*/
 	}
 
 	template<class T>
