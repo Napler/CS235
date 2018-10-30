@@ -245,23 +245,21 @@ namespace custom
 	template<class T>
 	void list<T>::pop_back()
 	{
-		/*
 		Node<T> *newTail = pTail->pPrev;
+    newTail->pPrev = pTail->pPrev->pPrev;
 		delete pTail;
 		pTail = newTail;
 		numElements--;
-		*/
 	}
 
 	template<class T>
 	void list<T>::pop_front()
 	{
-		/*
 		Node<T> *newHead = pHead->pNext;
+    newHead->pNext = pHead->pNext->pNext;
 		delete pHead;
 		pHead = newHead;
 		numElements--;
-		*/
 	}
 
 	template<class T>
@@ -291,13 +289,43 @@ namespace custom
 	template<class T>
 	void list<T>::erase(iterator &it)
 	{
-		//todo
+    if(it == begin())
+    {
+      pop_front();
+      return;
+    }
+    if(it.pNode->pNext == NULL) 
+    {
+      pop_back();
+      return;
+    }
+    linkNodes(it.pNode->pPrev, it.pNode->pNext);
+    delete it.pNode;
+    
+    numElements--;
 	}
 
 	template<class T>
 	void list<T>::insert(iterator it, T t)
 	{
-		//todo
+    if (it == begin())
+    {
+      push_front(t);
+      return;
+    }
+    if (it.pNode->pNext == NULL)
+    {
+      push_back(t);
+      return;
+    }
+    Node<T> *pNew = new Node<T>(t);
+    if (it != NULL)
+    {
+      pNew->pNext = it.pNode;
+      pNew->pPrev = it.pNode->pPrev;
+      it.pNode->pPrev = pNew;
+      if(pNew->pPrev) pNew->pPrev->pNext = pNew;
+    }
 	}
 
 	//iterators
@@ -305,9 +333,9 @@ namespace custom
 	class list <T> ::iterator
 	{
 	private:
-		Node<T> *pNode;
 
 	public:
+		Node<T> *pNode;  // todo: make this private by changing erase and insert to friends of iterator
 		iterator() : pNode(nullptr) {}
 		iterator(Node<T> *rhs) : pNode(rhs) {}
 		iterator(const iterator &rhs) { *this = rhs; }
@@ -315,6 +343,7 @@ namespace custom
 
 		bool operator==(const iterator &rhs) const { return pNode == rhs.pNode; }
 		bool operator!=(const iterator &rhs) const { return pNode != rhs.pNode; }
+   
 		
 		T &operator*()
 		{
