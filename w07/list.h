@@ -240,13 +240,19 @@ namespace custom
 	template<class T>
 	void list<T>::pop_back()
 	{
-		//todo
+		Node<T> *newTail = pTail->pPrev;
+		delete pTail;
+		pTail = newTail;
+		numElements--;
 	}
 
 	template<class T>
 	void list<T>::pop_front()
 	{
-		//todo
+		Node<T> *newHead = pHead->pNext;
+		delete pHead;
+		pHead = newHead;
+		numElements--;
 	}
 
 	template<class T>
